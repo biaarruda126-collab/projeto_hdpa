@@ -8,19 +8,19 @@ function Menu() {
     <div className={styles.container}>
       <div className={styles.navBar}>
         <NavLink to="/enem">
-          <p>ENEM</p>
+          <p className="textMenu">ENEM</p>
         </NavLink>
         <NavLink to="/usp">
-          <p>USP</p>
+          <p className="textMenu">USP</p>
         </NavLink>
         <NavLink to="/unicamp">
-          <p>UNICAMP</p>
+          <p className="textMenu">UNICAMP</p>
         </NavLink>
         <NavLink to="/unesp">
-          <p>UNESP</p>
+          <p className="textMenu">UNESP</p>
         </NavLink>
         <NavLink to="/puc">
-          <p>PUC</p>
+          <p className="textMenu">PUC</p>
         </NavLink>
       </div>
     </div>
