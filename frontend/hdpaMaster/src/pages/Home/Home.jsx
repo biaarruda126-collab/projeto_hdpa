@@ -7,7 +7,7 @@ import banner from "../../assets/banner2.png";
 import enemLogo from "../../assets/enem.png";
 import uspLogo from "../../assets/usp.png";
 import unicampLogo from "../../assets/unicamp.png";
-import unespLogo from '../../assets/unesp.png';
+import unespLogo from '../../assets/Logo_Unesp.svg';
 import pucLogo from "../../assets/puc.png";
 
 import tupiImage from "../../assets/tupi.png";
