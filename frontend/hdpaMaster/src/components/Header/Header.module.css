@@ -29,11 +29,11 @@
   gap: 90px;
 }
 
-  .menuToggle {
-    display: none;
-    border: none;
-    background-color: #ffffff;
-  }
+.menuToggle {
+  display: none;
+  border: none;
+  background-color: #ffffff;
+}
 
 .menuItem {
   display: flex;
@@ -82,6 +82,7 @@
   }
 
   .menuToggle {
+    display: flex;
     border: none;
     background-color: #ffffff;
   }
