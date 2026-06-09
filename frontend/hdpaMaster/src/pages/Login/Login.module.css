@@ -27,7 +27,7 @@
   justify-content: space-evenly;
   align-items: center;
   position: relative;
-  top: 2rem;
+  top: 0rem;
 }
 
 .alignLogo {
@@ -65,12 +65,13 @@
   background-color: #ffffff;
   border-radius: 20px;
   position: relative;
-  width: 676px;
+  width: 600px;
+  height: 50px;
 }
 
 .input {
   width: 90%;
-  height: 53px;
+  height: 45px;
   padding-left: 20px;
   border: none;
   box-sizing: border-box;
@@ -91,8 +92,8 @@
 }
 
 .btnSubmit {
-  width: 266px;
-  height: 61px;
+  width: 250px;
+  height: 52px;
   border-radius: 10px;
   background-color: #0852f5;
   color: #ffffff;
@@ -100,7 +101,7 @@
   font-family: var(--fonteFamilyBtn);
   font-weight: var(--fontWeightBtn);
   font-size: var(--fontSizeBtn);
-  margin-top: 2rem;
+  margin-top: 1rem;
   transition: background-color 0.3s;
 }
 
