@@ -17,7 +17,9 @@ h2 {
 .unicampImg {
   width: 320px;
   position: relative;
-  left: -5rem;
+  left: -6.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .escolasUniversitarias {

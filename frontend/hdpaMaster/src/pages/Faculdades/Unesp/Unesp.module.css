@@ -15,8 +15,11 @@ h2 {
 }
 
 .unespImg {
-  width: 310px;
+  width: 240px;
+  margin-top: 2rem;
   margin-bottom: 2rem;
+  position: relative;
+  
 }
 
 .escolasUniversitarias {
