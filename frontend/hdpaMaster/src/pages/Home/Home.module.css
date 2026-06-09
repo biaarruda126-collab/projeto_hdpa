@@ -174,7 +174,8 @@ body {
 
 .uniCard:hover {
   transform: translateY(-4px);
-  background: #f3f3f3;
+  background: #efefef;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 .uniLogo {
