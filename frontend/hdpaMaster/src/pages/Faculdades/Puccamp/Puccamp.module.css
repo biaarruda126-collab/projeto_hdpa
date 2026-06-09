@@ -15,9 +15,11 @@ h2 {
 }
 
 .pucImg {
-  width: 310px;
+  width: 280px;
   position: relative;
   left: -4.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .escolasUniversitarias {
