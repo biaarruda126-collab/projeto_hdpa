@@ -15,19 +15,26 @@ h2 {
 }
 
 .uspImg {
-  width: 310px;
+  width: 320px;
+  position: relative;
+  left: -4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+   margin-left: 4rem;
 }
 
 .escolasUniversitariasUsp {
   border-bottom: 1px solid #afafaf;
   width: 85%;
+   margin-left: 4rem;
 }
 
 .sectionTextUsp {
   max-width: 1200px;
   color: #858585;
   font-size: 22;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+  margin-left: 4rem;
 }
 
 .sectionTextUsp p {
