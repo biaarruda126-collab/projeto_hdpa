@@ -9,6 +9,7 @@ import unicampLogo from "../../assets/unicamp.png";
 import unespLogo from "../../assets/Logo_Unesp.svg";
 import pucLogo from "../../assets/puc.png";
 import tupiImage from "../../assets/tupi.png";
+import pdfSimulado from "../../assets/SIMULADOS.pdf";
 import {
   BookOpen,
   ClipboardPen,
@@ -32,7 +33,10 @@ export default function Home() {
   ];
 
   const cardsToShow = isMobile ? 2 : 3;
-  const visibleCards = universityCards.slice(currentSlide, currentSlide + cardsToShow);
+  const visibleCards = universityCards.slice(
+    currentSlide,
+    currentSlide + cardsToShow,
+  );
 
   const irParaBancoDeQuestoes = () => {
     navigate("/bq");
@@ -40,6 +44,10 @@ export default function Home() {
 
   const irParaDesempenho = () => {
     navigate("/desempenho");
+  };
+
+  const irParaSimulado = () => {
+    window.open(pdfSimulado, "_blank", "noopener,noreferrer");
   };
 
   const nextSlide = () => {
@@ -82,17 +90,17 @@ export default function Home() {
         <div className={styles.menu}>
           <div className={styles.menuItem} onClick={irParaBancoDeQuestoes}>
             <BookOpen size={24} />
-            <span>Banco de Questões</span>
+            <span onClick={irParaBancoDeQuestoes}>Banco de Questões</span>
           </div>
 
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaSimulado}>
             <ClipboardPen size={24} />
             <span>Simulados</span>
           </div>
 
           <div className={styles.menuItem} onClick={irParaDesempenho}>
             <BarChart3 size={24} />
-            <span>Meu Desempenho</span>
+            <span onClick={irParaDesempenho}>Meu Desempenho</span>
           </div>
         </div>
 

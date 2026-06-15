@@ -1,4 +1,5 @@
 import logoImage from "../../assets/logo.png";
+import pdfSimulado from "../../assets/SIMULADOS.pdf";
 import styles from "./Header.module.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -24,6 +25,11 @@ function Header() {
     setMenuAberto(false);
   };
 
+  const abrirSimulados = () => {
+    window.open(pdfSimulado, "_blank", "noopener,noreferrer");
+    setMenuAberto(false);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.logoArea}>
@@ -42,7 +48,11 @@ function Header() {
           <span>Banco de Questões</span>
         </button>
 
-        <button className={styles.menuItem} type="button">
+        <button
+          className={styles.menuItem}
+          type="button"
+          onClick={abrirSimulados}
+        >
           <ClipboardPen size={24} />
           <span>Simulados</span>
         </button>
