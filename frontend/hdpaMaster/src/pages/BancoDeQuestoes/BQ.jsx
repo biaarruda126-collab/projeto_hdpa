@@ -271,10 +271,19 @@ function agruparQuestoes(linhas) {
       alternativas: [],
     };
 
+    // remove leading letter (e.g., "a) ") from alternative text for display
+    const alternativaTexto = String(linha.enunciado_da_alternativa || "").trim();
+    const letraExtraida = extrairLetra(alternativaTexto);
+    const textoSemPrefixo = alternativaTexto.replace(/^([a-eA-E])[).:-]\s*/, "").trim();
+
     questao.alternativas.push({
-      texto: linha.enunciado_da_alternativa,
-      correta: linha.validacao === "S",
-      letra: extrairLetra(linha.enunciado_da_alternativa),
+      texto: textoSemPrefixo || alternativaTexto,
+      correta:
+        String(linha.validacao || "").toUpperCase() === "S" ||
+        String(linha.validacao || "").toUpperCase() === "C",
+      originalLetra: letraExtraida || null,
+      // keep raw for debugging if needed
+      rawTexto: alternativaTexto,
     });
 
     if (linha.comentario_do_especialista) {
@@ -284,14 +293,30 @@ function agruparQuestoes(linhas) {
     grupos.set(chave, questao);
   });
 
-  return Array.from(grupos.values()).map((questao, index) => ({
-    ...questao,
-    numero: index + 1,
-    alternativas: [...questao.alternativas].sort((a, b) =>
-      a.letra > b.letra ? 1 : a.letra < b.letra ? -1 : 0,
-    ),
-    textoApoio: obterTextoApoio(questao),
-  }));
+  return Array.from(grupos.values()).map((questao, index) => {
+    // If alternatives include an original letter (a-e), sort by that letter.
+    // Otherwise preserve DB insertion order.
+    const alternativasOrdenadas = [...questao.alternativas].sort((a, b) => {
+      if (a.originalLetra && b.originalLetra) {
+        return a.originalLetra.localeCompare(b.originalLetra);
+      }
+      if (a.originalLetra) return -1;
+      if (b.originalLetra) return 1;
+      return 0;
+    });
+
+    const alternativasComLetra = alternativasOrdenadas.map((alt, i) => ({
+      ...alt,
+      letra: String.fromCharCode(97 + i), // a, b, c, d, e
+    }));
+
+    return {
+      ...questao,
+      numero: index + 1,
+      alternativas: alternativasComLetra,
+      textoApoio: obterTextoApoio(questao),
+    };
+  });
 }
 
 function opcoesUnicas(dados, campo) {
@@ -641,7 +666,10 @@ const assuntos = useMemo(() => {
                           ) : (
                             <Circle size={16} />
                           )}
-                          <span>{alternativa.texto}</span>
+                          <span>
+                            <strong style={{marginRight:8, textTransform:'lowercase'}}>{alternativa.letra})</strong>
+                            {alternativa.texto}
+                          </span>
                         </button>
                       );
                     })}
