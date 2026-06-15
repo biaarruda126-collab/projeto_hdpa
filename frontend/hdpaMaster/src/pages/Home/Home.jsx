@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import logoImage from "../../assets/logo.png";
@@ -9,11 +9,8 @@ import unicampLogo from "../../assets/unicamp.png";
 import unespLogo from "../../assets/Logo_Unesp.svg";
 import pucLogo from "../../assets/puc.png";
 import tupiImage from "../../assets/tupi.png";
-import Enem from "../Faculdades/Enem/Enem";
-import Usp from "../Faculdades/Usp/Usp";
-import Unicamp from "../Faculdades/Unicamp/Unicamp";
-import Unesp from "../Faculdades/Unesp/Unesp";
-import Puccamp from "../Faculdades/Puccamp/Puccamp";
+import pdfSimulado from "../../assets/SIMULADOS.pdf";
+import manualDoUsuario from "../../assets/MANUAL DO USUÁRIO.pdf";
 import {
   BookOpen,
   ClipboardPen,
@@ -23,11 +20,12 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import BQ from "../BancoDeQuestoes/BQ";
-
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+  const [perfilAberto, setPerfilAberto] = useState(false);
   const navigate = useNavigate();
+
 
   const universityCards = [
     { nome: "ENEM", logo: enemLogo, path: "/enem" },
@@ -37,14 +35,31 @@ export default function Home() {
     { nome: "PUC", logo: pucLogo, path: "/puccamp" },
   ];
 
-  const visibleCards = universityCards.slice(currentSlide, currentSlide + 3);
+  const cardsToShow = isMobile ? 2 : 3;
+  const visibleCards = universityCards.slice(
+    currentSlide,
+    currentSlide + cardsToShow,
+  );
 
-  const BQ = () => {
+  const irParaBancoDeQuestoes = () => {
     navigate("/bq");
   };
 
+  const irParaDesempenho = () => {
+    navigate("/desempenho");
+  };
+
+  const irParaSimulado = () => {
+    window.open(pdfSimulado, "_blank", "noopener,noreferrer");
+  };
+
+  const abrirManualDoUsuario = () => {
+    window.open(manualDoUsuario, "_blank", "noopener,noreferrer");
+    setPerfilAberto(false);
+  };
+
   const nextSlide = () => {
-    if (currentSlide < universityCards.length - 3) {
+    if (currentSlide < universityCards.length - cardsToShow) {
       setCurrentSlide(currentSlide + 1);
     }
   };
@@ -55,6 +70,15 @@ export default function Home() {
     }
   };
 
+  // Detectar mudanças de tamanho de tela
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 900);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleUniversityClick = (path) => {
     navigate(path);
   };
@@ -63,29 +87,49 @@ export default function Home() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logoArea}>
-          <img src={logoImage} alt="Logo" className={styles.logoImage} />
+          <img
+            src={logoImage}
+            alt="Logo"
+            className={styles.logoImage}
+            onClick={() => navigate("/home")}
+          />
         </div>
 
         <div className={styles.menu}>
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaBancoDeQuestoes}>
             <BookOpen size={24} />
-            <span onClick={BQ}>Banco de Questões</span>
+            <span onClick={irParaBancoDeQuestoes}>Banco de Questões</span>
           </div>
 
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaSimulado}>
             <ClipboardPen size={24} />
             <span>Simulados</span>
           </div>
 
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaDesempenho}>
             <BarChart3 size={24} />
-            <span>Meu Desempenho</span>
+            <span onClick={irParaDesempenho}>Meu Desempenho</span>
           </div>
         </div>
 
-        <button className={styles.profileButton}>
-          <UserCircle2 size={34} />
-        </button>
+        <div className={styles.profileArea}>
+          <button
+            className={styles.profileButton}
+            type="button"
+            onClick={() => setPerfilAberto((aberto) => !aberto)}
+          >
+            <UserCircle2 size={34} />
+          </button>
+
+          {perfilAberto && (
+            <div className={styles.profileBox}>
+              <span>Perfil</span>
+              <button type="button" onClick={abrirManualDoUsuario}>
+                Manual do Usuário
+              </button>
+            </div>
+          )}
+        </div>
       </header>
 
       <section className={styles.hero}>
