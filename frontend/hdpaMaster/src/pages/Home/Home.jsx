@@ -13,20 +13,8 @@ import unicampLogo from "../../assets/unicamp.png";
 import unespLogo from "../../assets/Logo_Unesp.svg";
 import pucLogo from "../../assets/puc.png";
 import tupiImage from "../../assets/tupi.png";
-<<<<<<< HEAD
-import Enem from "../Faculdades/Enem/Enem";
-
-// Importação dos componentes das páginas internas de cada faculdade
-import Usp from "../Faculdades/Usp/Usp";
-import Unicamp from "../Faculdades/Unicamp/Unicamp";
-import Unesp from "../Faculdades/Unesp/Unesp";
-import Puccamp from "../Faculdades/Puccamp/Puccamp";
-
-// Importação de ícones vetoriais da biblioteca lucide-react
-=======
 import pdfSimulado from "../../assets/SIMULADOS.pdf";
 import manualDoUsuario from "../../assets/MANUAL DO USUÁRIO.pdf";
->>>>>>> 7eca83f8c379001d2c7f6f0fd6b62b2cf9bbb2f6
 import {
   BookOpen,
   ClipboardPen,
@@ -43,11 +31,7 @@ export default function Home() {
   const [perfilAberto, setPerfilAberto] = useState(false);
   const navigate = useNavigate();
 
-<<<<<<< HEAD
 // Array de objetos contendo as informações que preencherão os cards do carrossel
-=======
-
->>>>>>> 7eca83f8c379001d2c7f6f0fd6b62b2cf9bbb2f6
   const universityCards = [
     { nome: "ENEM", logo: enemLogo, path: "/enem" },
     { nome: "USP", logo: uspLogo, path: "/usp" },
@@ -63,13 +47,6 @@ export default function Home() {
     currentSlide + cardsToShow,
   );
 
-<<<<<<< HEAD
-  // Função para redirecionar o usuário até a rota do Banco de Questões
-  const BQ = () => {
-    navigate("/bq");
-  };
-// Funções de navegação do carrossel (Avançar e Voltar) com validação de limites
-=======
   const irParaBancoDeQuestoes = () => {
     navigate("/bq");
   };
@@ -87,7 +64,7 @@ export default function Home() {
     setPerfilAberto(false);
   };
 
->>>>>>> 7eca83f8c379001d2c7f6f0fd6b62b2cf9bbb2f6
+  // Funcoes de navegacao do carrossel (Avancar e Voltar) com validacao de limites
   const nextSlide = () => {
     if (currentSlide < universityCards.length - cardsToShow) {
       setCurrentSlide(currentSlide + 1);
