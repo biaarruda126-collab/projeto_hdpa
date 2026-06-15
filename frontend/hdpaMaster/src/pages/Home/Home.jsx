@@ -13,6 +13,7 @@ import unicampLogo from "../../assets/unicamp.png";
 import unespLogo from "../../assets/Logo_Unesp.svg";
 import pucLogo from "../../assets/puc.png";
 import tupiImage from "../../assets/tupi.png";
+<<<<<<< HEAD
 import Enem from "../Faculdades/Enem/Enem";
 
 // Importação dos componentes das páginas internas de cada faculdade
@@ -22,6 +23,10 @@ import Unesp from "../Faculdades/Unesp/Unesp";
 import Puccamp from "../Faculdades/Puccamp/Puccamp";
 
 // Importação de ícones vetoriais da biblioteca lucide-react
+=======
+import pdfSimulado from "../../assets/SIMULADOS.pdf";
+import manualDoUsuario from "../../assets/MANUAL DO USUÁRIO.pdf";
+>>>>>>> 7eca83f8c379001d2c7f6f0fd6b62b2cf9bbb2f6
 import {
   BookOpen,
   ClipboardPen,
@@ -31,15 +36,18 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import BQ from "../BancoDeQuestoes/BQ";
-
 export default function Home() {
   // Estados para controlar o índice do carrossel e detectar se o dispositivo é mobile (< 900px)
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+  const [perfilAberto, setPerfilAberto] = useState(false);
   const navigate = useNavigate();
 
+<<<<<<< HEAD
 // Array de objetos contendo as informações que preencherão os cards do carrossel
+=======
+
+>>>>>>> 7eca83f8c379001d2c7f6f0fd6b62b2cf9bbb2f6
   const universityCards = [
     { nome: "ENEM", logo: enemLogo, path: "/enem" },
     { nome: "USP", logo: uspLogo, path: "/usp" },
@@ -50,13 +58,36 @@ export default function Home() {
 
   // Lógica de paginação do carrossel: define quantos cards exibir e extrai o pedaço correto do array
   const cardsToShow = isMobile ? 2 : 3;
-  const visibleCards = universityCards.slice(currentSlide, currentSlide + cardsToShow);
+  const visibleCards = universityCards.slice(
+    currentSlide,
+    currentSlide + cardsToShow,
+  );
 
+<<<<<<< HEAD
   // Função para redirecionar o usuário até a rota do Banco de Questões
   const BQ = () => {
     navigate("/bq");
   };
 // Funções de navegação do carrossel (Avançar e Voltar) com validação de limites
+=======
+  const irParaBancoDeQuestoes = () => {
+    navigate("/bq");
+  };
+
+  const irParaDesempenho = () => {
+    navigate("/desempenho");
+  };
+
+  const irParaSimulado = () => {
+    window.open(pdfSimulado, "_blank", "noopener,noreferrer");
+  };
+
+  const abrirManualDoUsuario = () => {
+    window.open(manualDoUsuario, "_blank", "noopener,noreferrer");
+    setPerfilAberto(false);
+  };
+
+>>>>>>> 7eca83f8c379001d2c7f6f0fd6b62b2cf9bbb2f6
   const nextSlide = () => {
     if (currentSlide < universityCards.length - cardsToShow) {
       setCurrentSlide(currentSlide + 1);
@@ -88,29 +119,49 @@ export default function Home() {
       {/* Cabeçalho principal com logo, links do menu superior e botão de perfil */}
       <header className={styles.header}>
         <div className={styles.logoArea}>
-          <img src={logoImage} alt="Logo" className={styles.logoImage} />
+          <img
+            src={logoImage}
+            alt="Logo"
+            className={styles.logoImage}
+            onClick={() => navigate("/home")}
+          />
         </div>
 
         <div className={styles.menu}>
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaBancoDeQuestoes}>
             <BookOpen size={24} />
-            <span onClick={BQ}>Banco de Questões</span>
+            <span onClick={irParaBancoDeQuestoes}>Banco de Questões</span>
           </div>
 
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaSimulado}>
             <ClipboardPen size={24} />
             <span>Simulados</span>
           </div>
 
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaDesempenho}>
             <BarChart3 size={24} />
-            <span>Meu Desempenho</span>
+            <span onClick={irParaDesempenho}>Meu Desempenho</span>
           </div>
         </div>
 
-        <button className={styles.profileButton}>
-          <UserCircle2 size={34} />
-        </button>
+        <div className={styles.profileArea}>
+          <button
+            className={styles.profileButton}
+            type="button"
+            onClick={() => setPerfilAberto((aberto) => !aberto)}
+          >
+            <UserCircle2 size={34} />
+          </button>
+
+          {perfilAberto && (
+            <div className={styles.profileBox}>
+              <span>Perfil</span>
+              <button type="button" onClick={abrirManualDoUsuario}>
+                Manual do Usuário
+              </button>
+            </div>
+          )}
+        </div>
       </header>
 
 {/* Seção Hero: Banner de destaque da página inicial */}
