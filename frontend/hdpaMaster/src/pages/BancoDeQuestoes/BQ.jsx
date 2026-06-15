@@ -287,6 +287,9 @@ function agruparQuestoes(linhas) {
   return Array.from(grupos.values()).map((questao, index) => ({
     ...questao,
     numero: index + 1,
+    alternativas: [...questao.alternativas].sort((a, b) =>
+      a.letra > b.letra ? 1 : a.letra < b.letra ? -1 : 0,
+    ),
     textoApoio: obterTextoApoio(questao),
   }));
 }
@@ -339,7 +342,18 @@ function BQ() {
     () => ["Todas", ...opcoesUnicas(dados, "relevancia_da_questao")],
     [dados],
   );
-  const assuntos = useMemo(() => opcoesUnicas(dados, "nome_topico"), [dados]);
+
+const assuntos = useMemo(() => {
+  if (!filtros.tema) {
+    return [];
+  }
+  
+  const dadosFiltradosPorTema = dados.filter(
+    (item) => item.nome_do_tema === filtros.tema
+  );
+  
+  return opcoesUnicas(dadosFiltradosPorTema, "nome_topico");
+}, [dados, filtros.tema]);
 
   const questoesFiltradas = useMemo(() => {
     const assuntoSelecionado = [
@@ -604,12 +618,12 @@ function BQ() {
                   <div className={styles.alternatives}>
                     {questaoAtual.alternativas.map((alternativa) => {
                       const selecionada = respostaAtual === alternativa.letra;
-                      const mostrarCorreta = respostaAtual && alternativa.correta;
                       const mostrarErrada = selecionada && !alternativa.correta;
+                      const mostrarCorreta = respostaAtual && alternativa.correta && !mostrarErrada;
 
                       return (
                         <button
-                          key={alternativa.texto}
+                          key={alternativa.letra || alternativa.texto}
                           type="button"
                           className={`${styles.alternative} ${
                             selecionada ? styles.selectedAlternative : ""
