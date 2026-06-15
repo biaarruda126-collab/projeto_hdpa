@@ -9,11 +9,6 @@ import unicampLogo from "../../assets/unicamp.png";
 import unespLogo from "../../assets/Logo_Unesp.svg";
 import pucLogo from "../../assets/puc.png";
 import tupiImage from "../../assets/tupi.png";
-import Enem from "../Faculdades/Enem/Enem";
-import Usp from "../Faculdades/Usp/Usp";
-import Unicamp from "../Faculdades/Unicamp/Unicamp";
-import Unesp from "../Faculdades/Unesp/Unesp";
-import Puccamp from "../Faculdades/Puccamp/Puccamp";
 import {
   BookOpen,
   ClipboardPen,
@@ -22,8 +17,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-
-import BQ from "../BancoDeQuestoes/BQ";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,8 +32,12 @@ export default function Home() {
 
   const visibleCards = universityCards.slice(currentSlide, currentSlide + 3);
 
-  const BQ = () => {
+  const irParaBancoDeQuestoes = () => {
     navigate("/bq");
+  };
+
+  const irParaDesempenho = () => {
+    navigate("/desempenho");
   };
 
   const nextSlide = () => {
@@ -63,13 +60,18 @@ export default function Home() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logoArea}>
-          <img src={logoImage} alt="Logo" className={styles.logoImage} />
+          <img
+            src={logoImage}
+            alt="Logo"
+            className={styles.logoImage}
+            onClick={() => navigate("/home")}
+          />
         </div>
 
         <div className={styles.menu}>
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaBancoDeQuestoes}>
             <BookOpen size={24} />
-            <span onClick={BQ}>Banco de Questões</span>
+            <span>Banco de Questões</span>
           </div>
 
           <div className={styles.menuItem}>
@@ -77,7 +79,7 @@ export default function Home() {
             <span>Simulados</span>
           </div>
 
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem} onClick={irParaDesempenho}>
             <BarChart3 size={24} />
             <span>Meu Desempenho</span>
           </div>

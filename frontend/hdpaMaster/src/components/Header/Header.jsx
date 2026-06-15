@@ -1,25 +1,27 @@
 import logoImage from "../../assets/logo.png";
-import React from "react";
 import styles from "./Header.module.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import {
   BookOpen,
   ClipboardPen,
   BarChart3,
   UserCircle2,
-  ChevronLeft,
-  ChevronRight,
   Menu,
   X,
 } from "lucide-react";
 
 function Header() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const navigate = useNavigate();
 
   const menuToggle = () => {
-    setMenuAberto(!menuAberto);
+    setMenuAberto((aberto) => !aberto);
+  };
+
+  const irPara = (rota) => {
+    navigate(rota);
+    setMenuAberto(false);
   };
 
   return (
@@ -31,27 +33,35 @@ function Header() {
       </div>
 
       <div className={menuAberto ? styles.menuAberto : styles.menu}>
-        <div className={styles.menuItem}>
+        <button
+          className={styles.menuItem}
+          type="button"
+          onClick={() => irPara("/bq")}
+        >
           <BookOpen size={24} />
           <span>Banco de Questões</span>
-        </div>
+        </button>
 
-        <div className={styles.menuItem}>
+        <button className={styles.menuItem} type="button">
           <ClipboardPen size={24} />
           <span>Simulados</span>
-        </div>
+        </button>
 
-        <div className={styles.menuItem}>
+        <button
+          className={styles.menuItem}
+          type="button"
+          onClick={() => irPara("/desempenho")}
+        >
           <BarChart3 size={24} />
           <span>Meu Desempenho</span>
-        </div>
+        </button>
       </div>
 
-      <button className={styles.profileButton}>
+      <button className={styles.profileButton} type="button">
         <UserCircle2 size={34} />
       </button>
 
-      <button className={styles.menuToggle} onClick={menuToggle}>
+      <button className={styles.menuToggle} type="button" onClick={menuToggle}>
         {menuAberto ? <X size={24} /> : <Menu size={24} />}
       </button>
     </header>
