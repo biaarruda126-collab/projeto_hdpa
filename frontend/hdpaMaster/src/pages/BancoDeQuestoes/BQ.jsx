@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Header from "../../components/Header/Header";
 import styles from "./BQ.module.css";
+import { textosPorEnunciadoPdf } from "./textosQuestoes";
 import {
   ArrowLeft,
   ArrowRight,
@@ -245,7 +246,10 @@ function extrairLetra(alternativa = "") {
 }
 
 function obterTextoApoio(questao) {
-  const apoioPorEnunciado = textosPorEnunciado.find((item) =>
+  const apoioPorEnunciado = [
+    ...textosPorEnunciadoPdf,
+    ...textosPorEnunciado,
+  ].find((item) =>
     questao.enunciado.includes(item.contem),
   );
 
