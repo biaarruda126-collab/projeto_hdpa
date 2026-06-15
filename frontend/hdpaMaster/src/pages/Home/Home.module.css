@@ -161,7 +161,7 @@ body {
 .uniCard {
   width: 230px;
   height: 92px;
-  background: #f4f4f4;
+  background: white;
   border-radius: 34px;
   display: flex;
   align-items: center;
@@ -174,7 +174,7 @@ body {
 
 .uniCard:hover {
   transform: translateY(-4px);
-  background: #efefef;
+  background: white;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
