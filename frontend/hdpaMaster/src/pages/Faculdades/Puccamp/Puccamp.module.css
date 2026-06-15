@@ -58,14 +58,18 @@ footer {
 
   .sectionText {
     padding: 0 1rem;
+    max-width: 350px;
+    justify-content: center;
+  margin-left: 5rem;
   }
 
   .pucImg {
-    left: -4rem;
+    left: 2rem;
   }
 
   .escolasUniversitarias{
-    width: 100%;
+  width: 90%;
+    margin-left: 5.5rem;
   }
 
   .footer{

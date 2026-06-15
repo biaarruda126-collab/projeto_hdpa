@@ -59,17 +59,19 @@ h2 {
   }
 
   .sectionTextUsp {
+    padding: 0 1rem;
     max-width: 350px;
     justify-content: center;
+  margin-left: -0.5rem;
   }
 
   .uspImg {
-    position: relative;
-    left: -4rem;
+    left: -7rem;
   }
 
   .escolasUniversitariasUsp {
     width: 90%;
+    margin-left: -1rem;
   }
 
   .footerUsp {
