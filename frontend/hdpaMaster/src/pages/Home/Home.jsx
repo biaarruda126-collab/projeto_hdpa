@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import logoImage from "../../assets/logo.png";
@@ -20,6 +20,7 @@ import {
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const navigate = useNavigate();
 
   const universityCards = [
@@ -30,7 +31,8 @@ export default function Home() {
     { nome: "PUC", logo: pucLogo, path: "/puccamp" },
   ];
 
-  const visibleCards = universityCards.slice(currentSlide, currentSlide + 3);
+  const cardsToShow = isMobile ? 2 : 3;
+  const visibleCards = universityCards.slice(currentSlide, currentSlide + cardsToShow);
 
   const irParaBancoDeQuestoes = () => {
     navigate("/bq");
@@ -41,7 +43,7 @@ export default function Home() {
   };
 
   const nextSlide = () => {
-    if (currentSlide < universityCards.length - 3) {
+    if (currentSlide < universityCards.length - cardsToShow) {
       setCurrentSlide(currentSlide + 1);
     }
   };
@@ -51,6 +53,15 @@ export default function Home() {
       setCurrentSlide(currentSlide - 1);
     }
   };
+
+  // Detectar mudanças de tamanho de tela
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 900);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleUniversityClick = (path) => {
     navigate(path);
